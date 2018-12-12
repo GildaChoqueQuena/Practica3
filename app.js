@@ -8,10 +8,10 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var serviceRouter = require('./routes/services');
-
+var recetasRouter = require('./routes/foods/recetas');
+var clientesRouter = require('./routes/foods/clientes');
 const port = 3000;
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,7 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/services',serviceRouter);
+app.use('/services', serviceRouter);
+app.use('/api/recetas',recetasRouter);
+app.use('/api/clientes',clientesRouter);
+
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -59,7 +62,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, () => {
-  console.log('corriendo en el puerto: ' + port);
+  console.log('corriendo en el puerto : ' + port);
 })
 
 module.exports = app;
